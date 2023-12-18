@@ -4,8 +4,8 @@ import { defineConfig } from 'dumi';
 export default defineConfig({
   themeConfig: {
     name: 'ostore',
-    logo: '/logo.svg',
-    favicons: ['/logo.svg'],
+    logo: '/ostore.svg',
+    favicons: ['/ostore.png'],
     nav: {
       // mode可选值有：override、append、prepend
       // - override: 直接覆盖约定导航，与 nav: [{ title: 'Blog', link: '/blog' }] 配置相同
@@ -13,15 +13,17 @@ export default defineConfig({
       // - prepend: 将 value 中的导航添加到约定路由前面
       mode: "override",
       value: [
-        { title: '组件封装', link: '/components/table' },
-        { title: '工具函数', link: '/utils/date' },
-        { title: '功能实现', link: '/functionals/border-image' },
+        { title: '组件', link: '/components/table' },
+        { title: '函数', link: '/utils' },
+        { title: '功能', link: '/functionals/border-image' },
       ]
     }
   },
   
   resolve: {
-    // docDirs: [{ type: 'doc', dir: 'docs' }],
+    // docDirs: [
+    //   { type: 'doc', dir: 'docs' },
+    // ],
     atomDirs: [
       { type: 'component', dir: '/packages/components' },
       { type: 'util', dir: '/packages/utils' },
