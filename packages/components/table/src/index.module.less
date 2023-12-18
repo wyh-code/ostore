@@ -1,0 +1,72 @@
+.tableContainer {
+
+  .table {
+    position: relative;
+    width: 100%;
+    border: 0;
+
+    th,
+    td {
+      text-align: left;
+      text-overflow: ellipsis;
+      word-break: break-all;
+      border-bottom: 1px solid #e6ebf1
+    }
+
+    th {
+      background: #f1f3f6;
+      color: #111720;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    td {
+      cursor: default;
+    }
+
+    .tableFormCellWrapper {
+      padding: 16px;
+    }
+
+    .tableFormCellMessageWrapper {
+      position: relative;
+    }
+
+    .cellMessage {
+      position: absolute;
+      font-size: 10px;
+      bottom: 2px;
+      left: 16px;
+      color: #F04631;
+    }
+  }
+
+  .loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .loadingMask {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+      opacity: .7;
+      filter: blur(1px);
+    }
+  }
+
+  .empty {
+    color: #bcc5d1;
+    padding: 32px 0;
+    text-align: center;
+  }
+}

@@ -16,19 +16,29 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wyh-code/o-utils.git"
+    "url": "git+https://github.com/wyh-code/ostore.git"
   },
-  "keywords": [],
-  "author": "wyh-code<578311720@qq.com>",
+  "keywords": [
+    "utils",
+    "date",
+    "localStroge",
+    "stroge",
+    "cookie",
+    "math",
+    "format",
+    "file",
+    "url"
+  ],
+  "author": "wyh-code <578311720@qq.com>",
   "license": "ISC",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "bugs": {
-    "url": "https://github.com/wyh-code/o-utils/issues"
+    "url": "https://github.com/wyh-code/ostore/issues"
   },
-  "homepage": "https://github.com/wyh-code/o-utils#readme",
+  "homepage": "https://github.com/wyh-code/ostore#readme",
   "devDependencies": {
     "@babel/core": "^7.18.10",
     "@babel/preset-env": "^7.18.10",

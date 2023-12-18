@@ -35,6 +35,7 @@ export default defineConfig({
     // 'antd/lib': path.join(__dirname, 'components'),
     // 'antd/es': path.join(__dirname, 'components'),
     // 'antd/locale': path.join(__dirname, 'components/locale'),
+    ostore: path.join(__dirname, 'packages/components'),
     // antd: path.join(__dirname, 'packages/components'),
   },
 });

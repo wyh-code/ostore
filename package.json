@@ -28,5 +28,9 @@
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"
   },
-  "repository": "git@github.com:wyh-code/ostore.git"
+  "repository": "git@github.com:wyh-code/ostore.git",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
 }

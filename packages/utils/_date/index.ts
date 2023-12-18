@@ -6,6 +6,6 @@
  * @Description: 时间操作相关工具函数
  */
 
-export function format(){
+export function formatDate(){
   console.log('format date')
 }

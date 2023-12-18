@@ -1,0 +1,12 @@
+{
+  "name": "@ostore/functionals",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "wyh-code <578311720@qq.com>",
+  "license": "ISC"
+}
