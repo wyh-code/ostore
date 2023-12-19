@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "target": "es5" /* 编译目标 */,
     "module": "commonjs" /* 项目模块类型 */,

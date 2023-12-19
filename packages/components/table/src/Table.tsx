@@ -58,7 +58,7 @@ import React from 'react';
 
 const EditTable = () => {
   return (
-    <div>124</div>
+    <div>tabl11e</div>
   )
 }
 

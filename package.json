@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "ostore",
   "version": "0.0.1",
   "description": "A static site based on dumi",
   "scripts": {
@@ -30,6 +30,7 @@
   },
   "repository": "git@github.com:wyh-code/ostore.git",
   "dependencies": {
+    "dumi-plugin-color-chunk": "^1.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }

@@ -2,6 +2,7 @@ import path from 'path';
 import { defineConfig } from 'dumi';
 
 export default defineConfig({
+  plugins: ['dumi-plugin-color-chunk'],
   themeConfig: {
     name: 'ostore',
     logo: '/ostore.svg',
@@ -32,10 +33,8 @@ export default defineConfig({
     // codeBlockMode: 'passive',
   },
   alias: {
-    // 'antd/lib': path.join(__dirname, 'components'),
-    // 'antd/es': path.join(__dirname, 'components'),
-    // 'antd/locale': path.join(__dirname, 'components/locale'),
-    ostore: path.join(__dirname, 'packages/components'),
-    // antd: path.join(__dirname, 'packages/components'),
+    '@ostore/utils': path.join(__dirname, 'packages/utils'),
+    '@ostore/ui': path.join(__dirname, 'packages/components'),
+    '@ostore': path.join(__dirname, 'packages/components'),
   },
 });
