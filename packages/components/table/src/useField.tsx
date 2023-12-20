@@ -65,7 +65,12 @@ export class FormStore {
       return rules;
     };
 
-    const rowInfo = this.fieldEntities[0];
+    let rowInfo = this.fieldEntities[0];
+    // 若用户field传递出错，此处rowInfo可能获取不到，要做阻断
+    if(!rowInfo){
+      console.error('请检查 field 参数传递是否正确');
+      return;
+    }
     const keys = Object.keys(rowInfo);
     const descriptor = keys.reduce((descriptor, key) => {
       const entity = rowInfo[key];

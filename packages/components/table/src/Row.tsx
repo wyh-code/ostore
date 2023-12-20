@@ -25,7 +25,7 @@ export default ({ columns, record, index, moveRow, editRow, field, validateDisab
       }
       const { top, bottom } = ref.current.getBoundingClientRect();
       const halfOfHoverHeight = (bottom - top) / 2;
-      const { y } = monitor.getClientOffset() as any;
+      const y = monitor.getClientOffset()!.y;
       const hoverClientY = y - top;
       if ((dragIndex < hoverIndex && hoverClientY > halfOfHoverHeight)
         || (dragIndex > hoverIndex && hoverClientY < halfOfHoverHeight)

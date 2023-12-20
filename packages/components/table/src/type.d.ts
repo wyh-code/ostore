@@ -20,6 +20,8 @@ export interface IColumn extends IRules {
   rules?: IRules[];
   // 校验失败提示消息
   message?: ReactNode;
+  // 校验器是否防抖处理
+  debounce?: number;
   // 校验器
   validator?: (value: string, index: number, record: any) => boolean | ReactNode;
   // 默认渲染函数
@@ -41,6 +43,8 @@ export interface IEditTableBaseProps {
   validateDisabled?: boolean;
   // 是否校验所有行，默认false，只校验编辑行
   validateAllRow?: boolean;
+  // 没有自定义提示信息时，是否使用 title 作为提示信息
+  useTitleForErrorMessage?: boolean;
 }
 export interface IEditTableProps extends IEditTableBaseProps {
   dataSource: any[];

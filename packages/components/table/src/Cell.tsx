@@ -30,8 +30,8 @@ export default ({ column, record, index, editRow, field, validateDisabled, valid
       ...childProps,
       onChange: (value, event) => {
         setFieldValue(index, name, value);
-        if (name === 'code') {
-          debounce(field.validator(index, name), 800);
+        if (column.debounce) {
+          debounce(field.validator(index, name), column.debounce);
         } else {
           field.validator(index, name);
         }

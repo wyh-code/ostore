@@ -30,7 +30,10 @@ class Schema {
       }
 
       const { rules } = this.descriptor[name];
-      const tipName = this.descriptor[name].title || name;
+
+      // title 可能为React元素，待处理。。。。 useTitleForErrorMessage
+      // const tipName = this.descriptor[name].title || name;
+      const tipName = name;
 
       const ruleKeys = Object.keys(rules); // [required,min,max,validator]
 
