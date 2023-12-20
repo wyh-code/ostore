@@ -6,16 +6,21 @@
  * @Description: 其他相关工具函数
  */
 
+export interface IAnyObj {
+  [key: string]: any;
+}
+
 /**
  * 复制函数
  * @param text 需要复制的内容
  * @param callback 复制结束后的回调函数   
  */
-interface ICopyCallbackProps {
+export interface ICopyCallbackProps {
   status: boolean; // 标识是否复制成功
   message?: string; // 失败原因
 }
-export const copy = (text: string, callback?: (result: ICopyCallbackProps) => void ) => {
+export type TCopyFunction = (text: string, callback?: (result: ICopyCallbackProps) => void) => void;
+export const copy: TCopyFunction = (text: string, callback?: (result: ICopyCallbackProps) => void) => {
   if (text) {
     const input = document.createElement('input');
     input.setAttribute('readonly', 'readonly');
@@ -28,20 +33,46 @@ export const copy = (text: string, callback?: (result: ICopyCallbackProps) => vo
         document.execCommand('Copy');
         callback && callback({ status: true });
       } else {
-        callback && callback({ status: true, message: "document.execCommand('Copy')不存在" });
+        callback && callback({ status: false, message: "document.execCommand('Copy')不存在" });
       }
     } catch (err: any) {
-      callback && callback({ status: true, message: err.message });
+      callback && callback({ status: false, message: err.message });
     }
     document.body.removeChild(input);
   }
+};
+
+export type TCopyAsyncFunction = (text: string, callback?: (result: ICopyCallbackProps) => void) => Promise<ICopyCallbackProps>;
+export const copyAsync:TCopyAsyncFunction = (text: string) => {
+  return new Promise((resolve, reject) => {
+    if (text) {
+      const input = document.createElement('input');
+      input.setAttribute('readonly', 'readonly');
+      input.setAttribute('value', text);
+      document.body.appendChild(input);
+      input.setSelectionRange(0, 99999);
+      input.select();
+      try {
+        if (document.execCommand('Copy')) {
+          document.execCommand('Copy');
+          resolve({ status: true });
+        } else {
+          reject({ status: false, message: "document.execCommand('Copy')不存在" });
+        }
+      } catch (err: any) {
+        reject({ status: false, message: err.message });
+      }
+      document.body.removeChild(input);
+    }
+  })
 };
 
 /**
  * 指定dom元素全屏
  * @param id domId
  */
-export const requestFullscreen = (id: string) => {
+export type TRequestFullscreenFunction = (id: string) => void;
+export const requestFullscreen:TRequestFullscreenFunction = (id: string) => {
   const docElm = document.getElementById(id) as any;
   if (docElm.requestFullscreen) {
     docElm.requestFullscreen();
@@ -54,7 +85,8 @@ export const requestFullscreen = (id: string) => {
   }
 };
 // 退出全屏
-export const exitFullScreen = () => {
+export type TExitFullScreenFunction = () => void;
+export const exitFullScreen: TExitFullScreenFunction = () => {
   if (document.exitFullscreen) {
     document.exitFullscreen();
   } else if ((document as any).msExitFullscreen) {
@@ -72,9 +104,10 @@ export const exitFullScreen = () => {
  * @param key 指定key
  * @returns
  */
-export function uniqueByKey(arr: any[], key:string) {
-  const hash = {};
-  const result = arr.reduce((total, currentValue: any) => {
+export type TUniqueByKeyFunction = (arr: IAnyObj[], key: string) => IAnyObj[];
+export const uniqueByKey:TUniqueByKeyFunction = (arr: IAnyObj[], key: string): IAnyObj[] => {
+  const hash: { [key: string]: boolean } = {};
+  const result = arr.reduce<IAnyObj[]>((total, currentValue) => {
     if (currentValue && typeof currentValue === 'object' && !hash[currentValue[key]]) {
       // 如果当前元素的key值没有在hash对象里，则可放入最终结果数组
       hash[currentValue[key]] = true; // 把当前元素key值添加到hash对象
@@ -89,7 +122,8 @@ export function uniqueByKey(arr: any[], key:string) {
  * 判断对象是否有空值
  * @param obj
  */
-export function hasNullValue(obj: { [key:string]: any }) {
+export type THasNullValue = (obj: IAnyObj) => boolean;
+export const hasNullValue: THasNullValue = (obj: IAnyObj) => {
   let result = false;
   Object.values(obj)?.forEach((item) => {
     if (item === '' || item === null) {
@@ -103,7 +137,7 @@ export function hasNullValue(obj: { [key:string]: any }) {
  * 判断对象是否至少有一项值
  * @param obj
  */
-export function hasNotNullValue(obj:{ [key:string]: any }) {
+export const hasNotNullValue:THasNullValue = (obj: IAnyObj) => {
   let result = false;
   Object.values(obj)?.forEach((item) => {
     if (item !== '' && item !== null && item !== undefined) {
@@ -119,10 +153,10 @@ export function hasNotNullValue(obj:{ [key:string]: any }) {
  * @param classname 
  * @returns 
  */
-type TGetParentNode = (dom: HTMLElement, classname: string) => ParentNode | null | undefined;
-export const getParentNode:TGetParentNode = (dom: HTMLElement, classname: string) => {
+export type TGetParentNode = (dom: HTMLElement, classname: string) => ParentNode | null | undefined;
+export const getParentNode: TGetParentNode = (dom: HTMLElement, classname: string) => {
   if (!dom) return;
-  const parentNode:HTMLElement = dom.parentNode as HTMLElement;
+  const parentNode: HTMLElement = dom.parentNode as HTMLElement;
   if (parentNode && classname) {
     if (Array.from(parentNode.classList).includes(classname)) {
       return parentNode;
@@ -137,11 +171,11 @@ export const getParentNode:TGetParentNode = (dom: HTMLElement, classname: string
  * 获取数据类型
  * @param obj
  * @returns  TGetDataTypeReturn
- */
-type TGetDataTypeFunction = (obj: any) => TGetDataTypeReturn;
-type TGetDataTypeReturn = "array" |  "object" |  "number" | "string" | "null" | "undefined" | "function" | "date" | "regexp" | null;
-export const getDataType: TGetDataTypeFunction = (obj:any) => {
-  const s:string = Object.prototype.toString.call(obj);
+ */ 
+export type TGetDataTypeFunction = (obj: any) => TGetDataTypeReturn;
+export type TGetDataTypeReturn = "array" | "object" | "number" | "string" | "null" | "undefined" | "function" | "date" | "regexp" | null;
+export const getDataType: TGetDataTypeFunction = (obj: any) => {
+  const s: string = Object.prototype.toString.call(obj);
   const result = s.match(/\[object (.*?)\]/);
   return result && result[1].toLowerCase() as TGetDataTypeReturn;
 };

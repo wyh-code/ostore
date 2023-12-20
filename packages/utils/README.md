@@ -1,11 +1,12 @@
 ---
 nav:
   title: 函数
-  path: /components/table
+  path: /utils/version
 
-group: 版本更新
+group:
+  title: 版本更新
+  order: 99999
 
-order: 1
 title: 历史版本
 toc: content
 ---

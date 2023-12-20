@@ -6,8 +6,10 @@
  * @Description: 数学计算相关工具函数
  */
 
-type TComputType = "+" | '-' | '*' | '/';
-export function compute(type: TComputType, ...args: number[]) {
+export type TComputType = "+" | '-' | '*' | '/';
+export type TComputResult = { result: number, next: TComputFunction };
+export type TComputFunction = (type: TComputType, ...args: number[]) => TComputResult;
+export const compute: TComputFunction = (type: TComputType, ...args: number[]) => {
   // 计算放大倍数
   const getPower = (numbers: number[]) => {
     const lens = numbers.map((num: number) => num.toString().split(".")[1]?.length || 0);
@@ -42,7 +44,7 @@ export function compute(type: TComputType, ...args: number[]) {
 
   return {
     result,
-    next(nextType: TComputType, ...nextArgs: number[]) {
+    next(nextType, ...nextArgs) {
       return compute(nextType, result, ...nextArgs);
     }
   }

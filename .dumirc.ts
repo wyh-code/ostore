@@ -15,7 +15,7 @@ export default defineConfig({
       mode: "override",
       value: [
         { title: '组件', link: '/components/table' },
-        { title: '函数', link: '/utils' },
+        { title: '函数', link: '/utils/_url' },
         { title: '功能', link: '/functionals/border-image' },
       ]
     }
