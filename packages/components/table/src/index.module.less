@@ -1,72 +1,122 @@
-.tableContainer {
+// .tableContainer {
 
-  .table {
-    position: relative;
+//   .table {
+//     position: relative;
+//     width: 100%;
+//     border: 0;
+
+//     th,
+//     td {
+//       text-align: left;
+//       text-overflow: ellipsis;
+//       word-break: break-all;
+//       border-bottom: 1px solid #e6ebf1
+//     }
+
+//     th {
+//       background: #f1f3f6;
+//       color: #111720;
+//       text-align: left;
+//       font-weight: bold;
+//     }
+
+//     td {
+//       cursor: default;
+//     }
+
+//     .tableFormCellWrapper {
+//       padding: 16px;
+//     }
+
+//     .tableFormCellMessageWrapper {
+//       position: relative;
+//     }
+
+//     .cellMessage {
+//       position: absolute;
+//       font-size: 10px;
+//       bottom: 2px;
+//       left: 16px;
+//       color: #F04631;
+//     }
+//   }
+
+//   .loading {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+
+//     .loadingMask {
+//       position: absolute;
+//       z-index: 2;
+//       top: 0;
+//       left: 0;
+//       right: 0;
+//       bottom: 0;
+//       background: #fff;
+//       opacity: .7;
+//       filter: blur(1px);
+//     }
+//   }
+
+//   .empty {
+//     color: #bcc5d1;
+//     padding: 32px 0;
+//     text-align: center;
+//   }
+// }
+
+@import url('../../style.module.less');
+
+
+:root {
+  --ostore-table-bg: var(--ostore-color-bg-layout);
+  --ostore-table-border: var(--ostore-color-border);
+  --ostore-table-text-heading: var(--ostore-color-text-heading);
+  --ostore-table-text-label: var(--ostore-color-text-label);
+
+  --ostore-table-thead-bg: var(--ostore-color-primary-bg);
+  --ostore-table-tbody-bg: var( --ostore-color-bg-container);
+
+  --ostore-table-font-size: var(--ostore-font-size);
+  --ostore-table-font-family: var(--ostore-font-family);
+  --ostore-table-color-highlight: var(--ostore-color-highlight);
+ 
+  --ostore-table-tr-hover: var(--ostore-color-primary-bg-hover);
+  --ostore-table-cell-margin: var(--ostore-margin);
+  --ostore-table-cell-padding: var(--ostore-padding);
+}
+
+.ostore-table-container {
+  box-sizing: border-box;
+  background-color: var(--ostore-table-bg);
+  font-size: var(--ostore-table-font-size);
+  font-family: var(--ostore-table-font-family);
+
+  .ostore-table {
     width: 100%;
-    border: 0;
 
-    th,
-    td {
-      text-align: left;
-      text-overflow: ellipsis;
-      word-break: break-all;
-      border-bottom: 1px solid #e6ebf1
+    .ostore-table-cell-wrapper {
+      padding: var(--ostore-padding);
     }
 
-    th {
-      background: #f1f3f6;
-      color: #111720;
-      text-align: left;
-      font-weight: bold;
+    th .ostore-table-cell-wrapper {
+      background-color: var(--ostore-table-thead-bg);
+      color: var(--ostore-table-text-heading);
     }
 
-    td {
-      cursor: default;
+    td .ostore-table-cell-wrapper {
+      background-color: var(--ostore-table-tbody-bg);
+      color: var(--ostore-table-text-label);
     }
 
-    .tableFormCellWrapper {
-      padding: 16px;
+    tbody tr:hover .ostore-table-cell-wrapper {
+      background-color: var(--ostore-table-tr-hover);
     }
-
-    .tableFormCellMessageWrapper {
-      position: relative;
-    }
-
-    .cellMessage {
-      position: absolute;
-      font-size: 10px;
-      bottom: 2px;
-      left: 16px;
-      color: #F04631;
-    }
-  }
-
-  .loading {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .loadingMask {
-      position: absolute;
-      z-index: 2;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #fff;
-      opacity: .7;
-      filter: blur(1px);
-    }
-  }
-
-  .empty {
-    color: #bcc5d1;
-    padding: 32px 0;
-    text-align: center;
   }
 }

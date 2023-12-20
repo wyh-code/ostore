@@ -34,7 +34,7 @@ export interface IEditTableBaseProps {
   // 表头
   columns: IColumn[];
   // 可编辑时需传入，覆盖默认field
-  field: ClassUseField;
+  field?: ClassUseField;
   // 返回可以编辑的行
   editRow?: EditRow;
   // 存在则开启拖拽
@@ -54,8 +54,9 @@ export interface IEditTableProps extends IEditTableBaseProps {
   empty?: ReactNode;
 }
 
-
 export interface IRowProps extends IEditTableBaseProps {
+  // 可编辑时需传入，覆盖默认field
+  field: ClassUseField;
   record: any;
   index: number;
 }

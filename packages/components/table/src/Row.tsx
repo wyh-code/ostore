@@ -4,7 +4,7 @@ import { IRowProps, TYPE } from './type.d';
 import Cell from './Cell';
 
 export default ({ columns, record, index, moveRow, editRow, field, validateDisabled, validateAllRow }: IRowProps) => {
-  const ref = useRef<any>(null);
+  const ref = useRef<HTMLTableRowElement>(null);
 
   useEffect(() => {
     // 初始化编辑数据
@@ -23,7 +23,7 @@ export default ({ columns, record, index, moveRow, editRow, field, validateDisab
       if (dragIndex === hoverIndex) {
         return;
       }
-      const { top, bottom } = ref.current.getBoundingClientRect();
+      const { top, bottom } = ref.current!.getBoundingClientRect();
       const halfOfHoverHeight = (bottom - top) / 2;
       const y = monitor.getClientOffset()!.y;
       const hoverClientY = y - top;

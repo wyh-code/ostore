@@ -2,7 +2,7 @@ import path from 'path';
 import { defineConfig } from 'dumi';
 
 export default defineConfig({
-  plugins: ['dumi-plugin-color-chunk'],
+  // plugins: ['dumi-plugin-color-chunk'],
   themeConfig: {
     name: 'ostore',
     logo: '/ostore.svg',
@@ -20,6 +20,16 @@ export default defineConfig({
       ]
     }
   },
+  extraBabelPlugins: [
+    [
+      'babel-plugin-import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: true,
+      },
+    ],
+  ],
   
   resolve: {
     // docDirs: [

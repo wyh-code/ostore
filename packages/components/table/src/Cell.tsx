@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactElement, ReactPropTypes } from 'react';
 import { ICellProps } from './type.d';
 import styles from './index.module.less';
-import { debounce } from '@/utils/globalFn';
+// import { debounce } from '@ostore/utils';
 
 export default ({ column, record, index, editRow, field, validateDisabled, validateAllRow }: ICellProps) => {
   const [, forceUpdate] = React.useState({});
@@ -28,14 +28,14 @@ export default ({ column, record, index, editRow, field, validateDisabled, valid
     const { setFieldValue } = field;
     return {
       ...childProps,
-      onChange: (value, event) => {
+      onChange: (value: any, event: EventTarget|undefined) => {
         setFieldValue(index, name, value);
-        if (column.debounce) {
-          debounce(field.validator(index, name), column.debounce);
-        } else {
-          field.validator(index, name);
-        }
-
+        // if (column.debounce) {
+        //   debounce(field.validator(index, name), column.debounce);
+        // } else {
+        //   field.validator(index, name);
+        // }
+        field.validator(index, name);
         // 执行原函数
         childProps.onChange && childProps.onChange(value, event);
       },
@@ -48,7 +48,7 @@ export default ({ column, record, index, editRow, field, validateDisabled, valid
     };
   };
 
-  const elementProps = currentElementNode?.props || {};
+  const elementProps: ReactPropTypes = currentElementNode?.props || {};
   const CloneElement = currentElementNode?.type ? React.cloneElement(currentElementNode, getControlled(elementProps)) : currentElementNode;
 
   const errorMessage = field.getFieldError(index, name);

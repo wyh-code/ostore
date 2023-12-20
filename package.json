@@ -30,7 +30,9 @@
   },
   "repository": "git@github.com:wyh-code/ostore.git",
   "dependencies": {
+    "babel-plugin-import": "^1.13.8",
     "dumi-plugin-color-chunk": "^1.1.0",
+    "father": "^4.3.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }

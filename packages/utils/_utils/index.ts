@@ -179,3 +179,14 @@ export const getDataType: TGetDataTypeFunction = (obj: any) => {
   const result = s.match(/\[object (.*?)\]/);
   return result && result[1].toLowerCase() as TGetDataTypeReturn;
 };
+
+/**
+ * 防抖函数
+ * @param obj
+ * @returns  TGetDataTypeReturn
+ */ 
+// export type TGetDataTypeFunction = (obj: any) => TGetDataTypeReturn;
+// export type TGetDataTypeReturn = ;
+// export const debounce: TDebounceFunction = (obj: any) => {
+  
+// };

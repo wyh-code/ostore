@@ -1,5 +1,5 @@
 import React from "react";
-import { Loading } from '@alifd/next';
+// import { Loading } from '@alifd/next';
 import styles from './index.module.less';
 
 interface IProps {
@@ -10,7 +10,7 @@ export default ({ visible }: IProps) => {
   return visible ? (
     <div className={styles.loading}>
       <div className={styles.loadingMask}></div>
-      <Loading visible={true} />
+      {/* <Loading visible={true} /> */}
     </div>
   ) : null
 }
