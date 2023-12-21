@@ -71,52 +71,82 @@
 //   }
 // }
 
-@import url('../../style.module.less');
+@import url('../../style.less');
 
 
 :root {
   --ostore-table-bg: var(--ostore-color-bg-layout);
-  --ostore-table-border: var(--ostore-color-border);
+  --ostore-table-border: var(--ostore-color-border-m);
   --ostore-table-text-heading: var(--ostore-color-text-heading);
   --ostore-table-text-label: var(--ostore-color-text-label);
 
-  --ostore-table-thead-bg: var(--ostore-color-primary-bg);
+  --ostore-table-thead-bg: var(--ostore-color-bg-thead);
   --ostore-table-tbody-bg: var( --ostore-color-bg-container);
 
-  --ostore-table-font-size: var(--ostore-font-size);
+  --ostore-table-font-size: var(--ostore-font-size-sm);
+  --ostore-table-font-size-ss: var(--ostore-font-size-ss);
   --ostore-table-font-family: var(--ostore-font-family);
   --ostore-table-color-highlight: var(--ostore-color-highlight);
  
-  --ostore-table-tr-hover: var(--ostore-color-primary-bg-hover);
+  --ostore-table-tr-hover: var(--ostore-table-row-hover-bg);
   --ostore-table-cell-margin: var(--ostore-margin);
   --ostore-table-cell-padding: var(--ostore-padding);
 }
 
 .ostore-table-container {
   box-sizing: border-box;
-  background-color: var(--ostore-table-bg);
+  // background-color: var(--ostore-table-bg);
   font-size: var(--ostore-table-font-size);
   font-family: var(--ostore-table-font-family);
 
   .ostore-table {
     width: 100%;
+    border-collapse: collapse;
 
     .ostore-table-cell-wrapper {
-      padding: var(--ostore-padding);
+      padding: var(--ostore-table-cell-padding);
     }
 
-    th .ostore-table-cell-wrapper {
+    .ostore-table-cell-message-wrapper {
+      position: relative;
+    }
+    
+    th, td {
+      text-align: left;
+      padding: 0;
+    }
+
+    th {
       background-color: var(--ostore-table-thead-bg);
       color: var(--ostore-table-text-heading);
     }
 
+    tbody tr {
+      border-bottom: 1px solid var(--ostore-color-border-m);
+    }
+
+    tbody tr:hover {
+      background-color: var(--ostore-table-tr-hover);
+    }
+
     td .ostore-table-cell-wrapper {
-      background-color: var(--ostore-table-tbody-bg);
       color: var(--ostore-table-text-label);
     }
 
-    tbody tr:hover .ostore-table-cell-wrapper {
-      background-color: var(--ostore-table-tr-hover);
+    .cell-message {
+      position: absolute;
+      font-size: var(--ostore-table-font-size-ss);
+      bottom: 2px;
+      left: var(--ostore-table-cell-padding);
+      color: var(--ostore-table-color-highlight);
     }
   }
 }
+.ostore-table-container-border {
+  border: 1px solid var(--ostore-color-border-m);
+
+  tbody tr:last-child{
+    border-bottom: none;
+  }
+}
+

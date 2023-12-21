@@ -50,6 +50,8 @@ export interface IEditTableProps extends IEditTableBaseProps {
   dataSource: any[];
   // 是否开启loading
   loading?: boolean;
+  // 是否包含边框
+  hasBorder?: boolean;
   // 空状态
   empty?: ReactNode;
 }

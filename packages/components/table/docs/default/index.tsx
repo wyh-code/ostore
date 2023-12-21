@@ -11,6 +11,7 @@ export default () => {
     {
       title: '年龄',
       dataIndex: 'age',
+      cell: (value, index, record) => <div>{value}</div>
     },
     {
       title: '电话',

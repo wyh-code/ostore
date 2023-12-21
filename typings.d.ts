@@ -8,10 +8,26 @@ declare module '*.module.less' {
   export default classes;
 }
 
-declare module '*.module.css' {
+declare module '*.css' {
   const classes: { [key: string]: string };
   export default classes;
 }
+
+declare module '*.scss' {
+  const classes: { [key: string]: string };
+  export default classes;
+}
+
+declare module '*.less' {
+  const classes: { [key: string]: string };
+  export default classes;
+}
+
+declare module '*.css' {
+  const classes: { [key: string]: string };
+  export default classes;
+}
+
 
 declare module '*.d.ts' {
   const classes: { [key: string]: string };

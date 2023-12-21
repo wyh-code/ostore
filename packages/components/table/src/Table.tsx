@@ -7,11 +7,12 @@ import { useField } from './useField';
 // import Loading from './Loading';
 // import Empty from './Empty';
 import Row from './Row';
-import './index.module.less';
+import './index.less';
 
 const Table = (props:IEditTableProps, ref: React.RefObject<HTMLDivElement>) => {
   const { 
     columns, 
+    hasBorder=true,
     dataSource, 
     editRow, 
     moveRow, 
@@ -24,8 +25,8 @@ const Table = (props:IEditTableProps, ref: React.RefObject<HTMLDivElement>) => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="ostore-table-container" ref={ref}>
-        <table className="ostore-table" cellSpacing="0" cellPadding="0">
+      <div className={`ostore-table-container ${ hasBorder? 'ostore-table-container-border' : ''}`} ref={ref}>
+        <table className="ostore-table">
           <thead>
             <tr>
               {columns.map((column: IColumn) => (
@@ -38,7 +39,7 @@ const Table = (props:IEditTableProps, ref: React.RefObject<HTMLDivElement>) => {
             </tr>
           </thead>
           <tbody>
-            {/* {dataSource?.map((record, index) => (
+            {dataSource?.map((record, index) => (
               <Row
                 field={field}
                 key={index}
@@ -50,7 +51,7 @@ const Table = (props:IEditTableProps, ref: React.RefObject<HTMLDivElement>) => {
                 validateDisabled={validateDisabled}
                 validateAllRow={validateAllRow}
               />
-            ))} */}
+            ))}
           </tbody>
         </table>
         {/* <Loading visible={loading} />

@@ -1,8 +1,9 @@
-import React, { ReactElement, ReactPropTypes } from 'react';
+import React from 'react';
 import { ICellProps } from './type.d';
-import styles from './index.module.less';
-// import { debounce } from '@ostore/utils';
+import './index.less';
+import { debounce } from '@ostore/utils';
 
+// console.log(debounce, '--debounce-')
 export default ({ column, record, index, editRow, field, validateDisabled, validateAllRow }: ICellProps) => {
   const [, forceUpdate] = React.useState({});
   const forceReRender = () => {
@@ -35,20 +36,19 @@ export default ({ column, record, index, editRow, field, validateDisabled, valid
         // } else {
         //   field.validator(index, name);
         // }
-        field.validator(index, name);
         // 执行原函数
         childProps.onChange && childProps.onChange(value, event);
       },
-      onBlur: (value, event) => {
-        field.validator(index, name);
+      // onBlur: (value, event) => {
+      //   field.validator(index, name);
 
-        // 执行原函数
-        childProps.onBlur && childProps.onBlur(value, event);
-      },
+      //   // 执行原函数
+      //   childProps.onBlur && childProps.onBlur(value, event);
+      // },
     };
   };
 
-  const elementProps: ReactPropTypes = currentElementNode?.props || {};
+  const elementProps = currentElementNode?.props || {};
   const CloneElement = currentElementNode?.type ? React.cloneElement(currentElementNode, getControlled(elementProps)) : currentElementNode;
 
   const errorMessage = field.getFieldError(index, name);
@@ -72,10 +72,10 @@ export default ({ column, record, index, editRow, field, validateDisabled, valid
 
   return (
     <td style={{ width: column.width }}>
-      <div className={`${styles.tableFormCellWrapper} ${styles.tableFormCellMessageWrapper}`}>
+      <div className={`ostore-table-cell-wrapper ostore-table-cell-message-wrapper`}>
         {CloneElement}
         {isEdit && errorMessage && (
-          <span className={styles.cellMessage}>{errorMessage[0]}</span>
+          <span className="cell-message">{errorMessage[0]}</span>
         )}
       </div>
     </td>
