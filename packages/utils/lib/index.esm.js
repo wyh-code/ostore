@@ -3,130 +3,11 @@
  * @Date: 2023-12-18 15:56:53
  * @LastEditors: wyh-code<578311720@qq.com>
  * @LastEditTime: 2023-12-18 15:56:53
- * @Description: 其他相关工具函数
+ * @Description: 时间操作相关工具函数
  */
-var copy = function (text, callback) {
-    if (text) {
-        var input = document.createElement('input');
-        input.setAttribute('readonly', 'readonly');
-        input.setAttribute('value', text);
-        document.body.appendChild(input);
-        input.setSelectionRange(0, 99999);
-        input.select();
-        try {
-            if (document.execCommand('Copy')) {
-                document.execCommand('Copy');
-                callback && callback({ status: true });
-            }
-            else {
-                callback && callback({ status: true, message: "document.execCommand('Copy')不存在" });
-            }
-        }
-        catch (err) {
-            callback && callback({ status: true, message: err.message });
-        }
-        document.body.removeChild(input);
-    }
-};
-/**
- * 指定dom元素全屏
- * @param id domId
- */
-var requestFullscreen = function (id) {
-    var docElm = document.getElementById(id);
-    if (docElm.requestFullscreen) {
-        docElm.requestFullscreen();
-    }
-    else if (docElm.msRequestFullscreen) {
-        docElm.msRequestFullscreen();
-    }
-    else if (docElm.mozRequestFullScreen) {
-        docElm.mozRequestFullScreen();
-    }
-    else if (docElm.webkitRequestFullScreen) {
-        docElm.webkitRequestFullScreen();
-    }
-};
-// 退出全屏
-var exitFullScreen = function () {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    }
-    else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-    }
-    else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-    }
-    else if (document.webkitCancelFullScreen) {
-        document.webkitCancelFullScreen();
-    }
-};
-/**
- * 根据指定key的值，对对象数组进行去重
- * @param arr 需要去重的数组
- * @param key 指定key
- * @returns
- */
-function uniqueByKey(arr, key) {
-    var hash = {};
-    var result = arr.reduce(function (total, currentValue) {
-        if (currentValue && typeof currentValue === 'object' && !hash[currentValue[key]]) {
-            // 如果当前元素的key值没有在hash对象里，则可放入最终结果数组
-            hash[currentValue[key]] = true; // 把当前元素key值添加到hash对象
-            total.push(currentValue); // 把当前元素放入结果数组
-        }
-        return total; // 返回结果数组
-    }, []);
-    return result;
+function formatDate() {
+    console.log('format date');
 }
-/**
- * 判断对象是否有空值
- * @param obj
- */
-function hasNullValue(obj) {
-    var _a;
-    var result = false;
-    (_a = Object.values(obj)) === null || _a === void 0 ? void 0 : _a.forEach(function (item) {
-        if (item === '' || item === null) {
-            result = true;
-        }
-    });
-    return result;
-}
-/**
- * 判断对象是否至少有一项值
- * @param obj
- */
-function hasNotNullValue(obj) {
-    var _a;
-    var result = false;
-    (_a = Object.values(obj)) === null || _a === void 0 ? void 0 : _a.forEach(function (item) {
-        if (item !== '' && item !== null && item !== undefined) {
-            result = true;
-        }
-    });
-    return result;
-}
-var getParentNode = function (dom, classname) {
-    if (!dom)
-        return;
-    var parentNode = dom.parentNode;
-    if (parentNode && classname) {
-        if (Array.from(parentNode.classList).includes(classname)) {
-            return parentNode;
-        }
-        else {
-            return getParentNode(parentNode, classname);
-        }
-    }
-    return parentNode;
-};
-var getDataType = function (obj) {
-    var s = Object.prototype.toString.call(obj);
-    var result = s.match(/\[object (.*?)\]/);
-    return result && result[1].toLowerCase();
-};
 
 /*
  * @Author: wyh-code <578311720@qq.com>
@@ -156,32 +37,17 @@ var downloadFile = function (url, label) {
         };
     });
 };
-var dataURItoBlob = function (dataURI) {
-    var byteString = atob(dataURI.split(',')[1]);
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-    var ab = new ArrayBuffer(byteString.length);
-    var ia = new Uint8Array(ab);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-    var blob = new Blob([ab], { type: mimeString });
-    return blob;
-};
 
 /*
  * @Author: wyh-code <578311720@qq.com>
  * @Date: 2023-12-18 15:56:53
  * @LastEditors: wyh-code<578311720@qq.com>
  * @LastEditTime: 2023-12-18 15:56:53
- * @Description: localStorage、cookie 相关工具函数
+ * @Description: 格式化相关工具函数
  */
-var getCookies = function (name) {
-    var obj = document.cookie.split(';').reduce(function (map, str) {
-        map[str.split('=')[0].trim()] = str.split('=')[1].trim();
-        return map;
-    }, {});
-    return name ? obj[name] : obj;
-};
+function format() {
+    console.log('format');
+}
 
 function __spreadArray(to, from, pack) {
   if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
@@ -204,7 +70,7 @@ typeof SuppressedError === "function" ? SuppressedError : function (error, suppr
  * @LastEditTime: 2023-12-18 15:56:53
  * @Description: 数学计算相关工具函数
  */
-function compute(type) {
+var compute = function (type) {
     var args = [];
     for (var _i = 1; _i < arguments.length; _i++) {
         args[_i - 1] = arguments[_i];
@@ -247,18 +113,22 @@ function compute(type) {
             return compute.apply(void 0, __spreadArray([nextType, result], nextArgs, false));
         }
     };
-}
+};
 
 /*
  * @Author: wyh-code <578311720@qq.com>
  * @Date: 2023-12-18 15:56:53
  * @LastEditors: wyh-code<578311720@qq.com>
  * @LastEditTime: 2023-12-18 15:56:53
- * @Description: 时间操作相关工具函数
+ * @Description: localStorage、cookie 相关工具函数
  */
-function format() {
-    console.log('format date');
-}
+var getCookies = function (name) {
+    var obj = document.cookie.split(';').reduce(function (map, str) {
+        map[str.split('=')[0].trim()] = str.split('=')[1].trim();
+        return map;
+    }, {});
+    return name ? obj[name] : obj;
+};
 
 /*
  * @Author: wyh-code <578311720@qq.com>
@@ -267,19 +137,11 @@ function format() {
  * @LastEditTime: 2023-12-18 15:56:53
  * @Description: url 相关工具函数
  */
-/**
- * 获取url参数
- * @param key 指定key
- */
-function getUrlParams(key) {
+var getUrlParams = function (key) {
     var url = new URL(window.location.href);
     var params = Object.fromEntries(new URLSearchParams(url.search));
     return key ? params[key] : params;
-}
-/**
- * 修改href
- * @param query
- */
+};
 var setSearchParams = function (query) {
     var url = new URL(window.location.href);
     var params = new URLSearchParams(url.search);
@@ -297,5 +159,223 @@ var packUrlParams = function (params) {
     }
     return query.slice(0, -1);
 };
+var dataURItoBlob = function (dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    var blob = new Blob([ab], { type: mimeString });
+    return blob;
+};
 
-export { compute, copy, dataURItoBlob, downloadFile, exitFullScreen, format, getCookies, getDataType, getParentNode, getUrlParams, hasNotNullValue, hasNullValue, packUrlParams, requestFullscreen, setSearchParams, uniqueByKey };
+/*
+ * @Author: wyh-code <578311720@qq.com>
+ * @Date: 2023-12-18 15:56:53
+ * @LastEditors: wyh-code<578311720@qq.com>
+ * @LastEditTime: 2023-12-18 15:56:53
+ * @Description: 其他相关工具函数
+ */
+var copy = function (text, callback) {
+    if (text) {
+        var input = document.createElement('input');
+        input.setAttribute('readonly', 'readonly');
+        input.setAttribute('value', text);
+        document.body.appendChild(input);
+        input.setSelectionRange(0, 99999);
+        input.select();
+        try {
+            if (document.execCommand('Copy')) {
+                document.execCommand('Copy');
+                callback && callback({ status: true });
+            }
+            else {
+                callback && callback({ status: false, message: "document.execCommand('Copy')不存在" });
+            }
+        }
+        catch (err) {
+            callback && callback({ status: false, message: err.message });
+        }
+        document.body.removeChild(input);
+    }
+};
+var copyAsync = function (text) {
+    return new Promise(function (resolve, reject) {
+        if (text) {
+            var input = document.createElement('input');
+            input.setAttribute('readonly', 'readonly');
+            input.setAttribute('value', text);
+            document.body.appendChild(input);
+            input.setSelectionRange(0, 99999);
+            input.select();
+            try {
+                if (document.execCommand('Copy')) {
+                    document.execCommand('Copy');
+                    resolve({ status: true });
+                }
+                else {
+                    reject({ status: false, message: "document.execCommand('Copy')不存在" });
+                }
+            }
+            catch (err) {
+                reject({ status: false, message: err.message });
+            }
+            document.body.removeChild(input);
+        }
+    });
+};
+var requestFullscreen = function (id) {
+    var docElm = document.getElementById(id);
+    if (docElm.requestFullscreen) {
+        docElm.requestFullscreen();
+    }
+    else if (docElm.msRequestFullscreen) {
+        docElm.msRequestFullscreen();
+    }
+    else if (docElm.mozRequestFullScreen) {
+        docElm.mozRequestFullScreen();
+    }
+    else if (docElm.webkitRequestFullScreen) {
+        docElm.webkitRequestFullScreen();
+    }
+};
+var exitFullScreen = function () {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    }
+    else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    }
+    else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    }
+    else if (document.webkitCancelFullScreen) {
+        document.webkitCancelFullScreen();
+    }
+};
+var uniqueByKey = function (arr, key) {
+    var hash = {};
+    var result = arr.reduce(function (total, currentValue) {
+        if (currentValue && typeof currentValue === 'object' && !hash[currentValue[key]]) {
+            // 如果当前元素的key值没有在hash对象里，则可放入最终结果数组
+            hash[currentValue[key]] = true; // 把当前元素key值添加到hash对象
+            total.push(currentValue); // 把当前元素放入结果数组
+        }
+        return total; // 返回结果数组
+    }, []);
+    return result;
+};
+var hasNullValue = function (obj) {
+    var _a;
+    var result = false;
+    (_a = Object.values(obj)) === null || _a === void 0 ? void 0 : _a.forEach(function (item) {
+        if (item === '' || item === null) {
+            result = true;
+        }
+    });
+    return result;
+};
+/**
+ * 判断对象是否至少有一项值
+ * @param obj
+ */
+var hasNotNullValue = function (obj) {
+    var _a;
+    var result = false;
+    (_a = Object.values(obj)) === null || _a === void 0 ? void 0 : _a.forEach(function (item) {
+        if (item !== '' && item !== null && item !== undefined) {
+            result = true;
+        }
+    });
+    return result;
+};
+var getParentNode = function (dom, classname) {
+    if (!dom)
+        return;
+    var parentNode = dom.parentNode;
+    if (parentNode && classname) {
+        if (Array.from(parentNode.classList).includes(classname)) {
+            return parentNode;
+        }
+        else {
+            return getParentNode(parentNode, classname);
+        }
+    }
+    return parentNode;
+};
+var getDataType = function (obj) {
+    var s = Object.prototype.toString.call(obj);
+    var result = s.match(/\[object (.*?)\]/);
+    return result && result[1].toLowerCase();
+};
+/**
+ * 防抖函数
+ * @param obj
+ * @returns  debounce 函数接收一个函数 F，等待时间 wait，以及一个可选的 immediate 标志
+ */
+function debounce(func, wait, immediate) {
+    if (immediate === void 0) { immediate = false; }
+    var timeout = null;
+    // 返回的函数与输入函数 F 接受相同的参数
+    return function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        // 保存 this 上下文和传入的参数
+        var context = this;
+        // 清理函数，用于在等待时间结束后执行
+        var later = function () {
+            timeout = null;
+            if (!immediate)
+                func.apply(context, args);
+        };
+        // 判断是否立即执行
+        var callNow = immediate && timeout === null;
+        // 如果已经有计时器存在，清除它，这样我们就可以重设等待时间
+        if (timeout !== null) {
+            clearTimeout(timeout);
+        }
+        // 重新设置计时器
+        timeout = setTimeout(later, wait);
+        // 如果设置了立即执行，那么没有计时器存在时就执行函数
+        if (callNow)
+            func.apply(context, args);
+    };
+}
+/**
+ * 节流函数
+ * @param func
+ * @param limit
+ * @returns
+ */
+function throttle(func, limit) {
+    var inThrottle;
+    var lastFunc;
+    var lastRan;
+    return function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        var context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            lastRan = Date.now();
+            inThrottle = true;
+        }
+        else {
+            clearTimeout(lastFunc);
+            lastFunc = setTimeout(function () {
+                if (Date.now() - lastRan >= limit) {
+                    func.apply(context, args);
+                    lastRan = Date.now();
+                }
+            }, Math.max(limit - (Date.now() - lastRan), 0));
+        }
+    };
+}
+
+export { compute, copy, copyAsync, dataURItoBlob, debounce, downloadFile, exitFullScreen, format, formatDate, getCookies, getDataType, getParentNode, getUrlParams, hasNotNullValue, hasNullValue, packUrlParams, requestFullscreen, setSearchParams, throttle, uniqueByKey };

@@ -7,7 +7,7 @@ const clear = require('rollup-plugin-clear');
 const { babel } = require('@rollup/plugin-babel');
 
 export default {
-  input: './src/index.ts',
+  input: './index.ts',
   output: [
     {
       dir: 'lib',

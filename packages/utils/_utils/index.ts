@@ -9,6 +9,8 @@
 export interface IAnyObj {
   [key: string]: any;
 }
+// 定义函数类型，它可以接收任意数量的任意类型参数，并且可以返回任意类型的值
+export type AnyFunction = (...args: any[]) => any;
 
 /**
  * 复制函数
@@ -183,10 +185,61 @@ export const getDataType: TGetDataTypeFunction = (obj: any) => {
 /**
  * 防抖函数
  * @param obj
- * @returns  TGetDataTypeReturn
+ * @returns  debounce 函数接收一个函数 F，等待时间 wait，以及一个可选的 immediate 标志
  */ 
-// export type TGetDataTypeFunction = (obj: any) => TGetDataTypeReturn;
-// export type TGetDataTypeReturn = ;
-// export const debounce: TDebounceFunction = (obj: any) => {
-  
-// };
+export function debounce<F extends AnyFunction>(
+  func: F,
+  wait: number,
+  immediate: boolean = false
+): (...args: Parameters<F>) => void {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+  // 返回的函数与输入函数 F 接受相同的参数
+  return function(this: ThisParameterType<F>, ...args: Parameters<F>): void {
+    // 保存 this 上下文和传入的参数
+    const context = this;
+    // 清理函数，用于在等待时间结束后执行
+    const later = () => {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    // 判断是否立即执行
+    const callNow = immediate && timeout === null;
+    // 如果已经有计时器存在，清除它，这样我们就可以重设等待时间
+    if (timeout !== null) {
+      clearTimeout(timeout);
+    }
+    // 重新设置计时器
+    timeout = setTimeout(later, wait);
+    // 如果设置了立即执行，那么没有计时器存在时就执行函数
+    if (callNow) func.apply(context, args);
+  };
+}
+
+/**
+ * 节流函数
+ * @param func 
+ * @param limit 
+ * @returns 
+ */
+export function throttle<F extends AnyFunction>(func: F, limit: number): F {
+  let inThrottle: boolean;
+  let lastFunc: ReturnType<typeof setTimeout>;
+  let lastRan: number;
+
+  return function(this: ThisParameterType<F>, ...args: Parameters<F>): void {
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      lastRan = Date.now();
+      inThrottle = true;
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(() => {
+        if (Date.now() - lastRan >= limit) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        }
+      }, Math.max(limit - (Date.now() - lastRan), 0));
+    }
+  } as F;
+}
