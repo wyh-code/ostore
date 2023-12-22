@@ -75,14 +75,19 @@ export const copyAsync:TCopyAsyncFunction = (text: string) => {
  */
 export type TRequestFullscreenFunction = (id: string) => void;
 export const requestFullscreen:TRequestFullscreenFunction = (id: string) => {
+  // 尝试通过ID获取DOM元素,使用`any`类型以便调用全屏相关的方法
   const docElm = document.getElementById(id) as any;
   if (docElm.requestFullscreen) {
+    // 标准方法
     docElm.requestFullscreen();
   } else if (docElm.msRequestFullscreen) {
+    // IE11的全屏方法
     docElm.msRequestFullscreen();
   } else if (docElm.mozRequestFullScreen) {
+    // Firefox的全屏方法
     docElm.mozRequestFullScreen();
   } else if (docElm.webkitRequestFullScreen) {
+     // Chrome及较早的Safari的全屏方法
     docElm.webkitRequestFullScreen();
   }
 };
@@ -90,12 +95,16 @@ export const requestFullscreen:TRequestFullscreenFunction = (id: string) => {
 export type TExitFullScreenFunction = () => void;
 export const exitFullScreen: TExitFullScreenFunction = () => {
   if (document.exitFullscreen) {
+    // 使用标准方法退出全屏模式
     document.exitFullscreen();
   } else if ((document as any).msExitFullscreen) {
+    // 针对IE浏览器的退出全屏方法
     (document as any).msExitFullscreen();
   } else if ((document as any).mozCancelFullScreen) {
+    // 针对Firefox浏览器的退出全屏方法
     (document as any).mozCancelFullScreen();
   } else if ((document as any).webkitCancelFullScreen) {
+    // 针对Chrome以及旧版Safari的退出全屏方法
     (document as any).webkitCancelFullScreen();
   }
 };
@@ -112,10 +121,10 @@ export const uniqueByKey:TUniqueByKeyFunction = (arr: IAnyObj[], key: string): I
   const result = arr.reduce<IAnyObj[]>((total, currentValue) => {
     if (currentValue && typeof currentValue === 'object' && !hash[currentValue[key]]) {
       // 如果当前元素的key值没有在hash对象里，则可放入最终结果数组
-      hash[currentValue[key]] = true; // 把当前元素key值添加到hash对象
-      total.push(currentValue); // 把当前元素放入结果数组
+      hash[currentValue[key]] = true; // 标记键值已经处理
+      total.push(currentValue); // 添加唯一对象到结果数组
     }
-    return total; // 返回结果数组
+    return total; // 返回累积的结果
   }, []);
   return result;
 }
@@ -127,11 +136,14 @@ export const uniqueByKey:TUniqueByKeyFunction = (arr: IAnyObj[], key: string): I
 export type THasNullValue = (obj: IAnyObj) => boolean;
 export const hasNullValue: THasNullValue = (obj: IAnyObj) => {
   let result = false;
+  // 使用可选链确保obj不为null或undefined
   Object.values(obj)?.forEach((item) => {
+    // 检查属性值是否为空字符串或null
     if (item === '' || item === null) {
       result = true;
     }
   });
+  // 返回检查结果
   return result;
 }
 
@@ -150,26 +162,6 @@ export const hasNotNullValue:THasNullValue = (obj: IAnyObj) => {
 }
 
 /**
- * 递归获取指定class的祖先元素
- * @param dom 
- * @param classname 
- * @returns 
- */
-export type TGetParentNode = (dom: HTMLElement, classname: string) => ParentNode | null | undefined;
-export const getParentNode: TGetParentNode = (dom: HTMLElement, classname: string) => {
-  if (!dom) return;
-  const parentNode: HTMLElement = dom.parentNode as HTMLElement;
-  if (parentNode && classname) {
-    if (Array.from(parentNode.classList).includes(classname)) {
-      return parentNode;
-    } else {
-      return getParentNode(parentNode, classname);
-    }
-  }
-  return parentNode;
-};
-
-/**
  * 获取数据类型
  * @param obj
  * @returns  TGetDataTypeReturn
@@ -179,6 +171,8 @@ export type TGetDataTypeReturn = "array" | "object" | "number" | "string" | "nul
 export const getDataType: TGetDataTypeFunction = (obj: any) => {
   const s: string = Object.prototype.toString.call(obj);
   const result = s.match(/\[object (.*?)\]/);
+  // 从匹配结果中提取类型字符串，并将其转换为小写
+  // 如果匹配失败，即result为null，则直接返回null
   return result && result[1].toLowerCase() as TGetDataTypeReturn;
 };
 

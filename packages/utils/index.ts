@@ -1,7 +1,9 @@
 
 export * from './_date';
 
-export * from './_file';
+export * from './_dom';
+
+export * from './_assets';
 
 export * from './_format';
 

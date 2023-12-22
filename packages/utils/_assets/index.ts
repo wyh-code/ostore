@@ -10,6 +10,7 @@
  * 下载文件
  * @param url 文件下载路径
  * @param label 下载文件名
+ * @returns 返回一个Promise对象，该对象解析为一个指示下载操作成功状态的对象
  */
 export type IDownloadFileFunction = (url: string, label: string) => Promise<IDownloadFileResult>;
 export interface IDownloadFileResult {
@@ -19,8 +20,8 @@ export interface IDownloadFileResult {
 export const downloadFile: IDownloadFileFunction = (url: string, label: string) => {
   return fetch(url)
     .then((response) => response.blob())
-    .then((response) => {
-      const blob = new Blob([response]);
+    .then((blobResponse) => {
+      const blob = new Blob([blobResponse]);
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
       link.download = label;
