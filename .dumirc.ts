@@ -2,7 +2,7 @@ import path from 'path';
 import { defineConfig } from 'dumi';
 
 export default defineConfig({
-  // plugins: ['dumi-plugin-color-chunk'],
+  plugins: ['dumi-plugin-color-chunk'],
   themeConfig: {
     name: 'ostore',
     logo: '/ostore.svg',
@@ -18,7 +18,11 @@ export default defineConfig({
         { title: '函数', link: '/utils/_url' },
         { title: '功能', link: '/functionals/border-image' },
       ]
-    }
+    },
+    socialLinks: {
+      github: 'https://github.com/wyh-code/ostore',
+    },
+    footer: 'ostore | Copyright © 2023-present',
   },
   extraBabelPlugins: [
     [

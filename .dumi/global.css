@@ -1,0 +1,36 @@
+html {
+  background-color: #fff;
+}
+.dumi-default-doc-layout {
+  background-color: #fff !important;
+}
+.dumi-default-header:not([data-static]){
+  background-color: rgba(255, 255, 255, .9) !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+}
+.dumi-default-hero {
+  margin: -65px auto !important;
+  height: calc(100vh - 85px) !important;
+  padding-top: 25vh !important;
+}
+
+.dumi-default-header-content {
+  height: 64px !important;
+}
+.dumi-default-header-content,
+.dumi-default-doc-layout > main {
+  max-width: 100% !important;
+  padding: 0 40px !important;
+}
+.dumi-default-navbar > li {
+  font-size: 16px !important;
+}
+
+.markdown p {
+  line-height: 1.8;
+  /* margin-block-end: 0px !important; */
+}
+
+.dumi-default-logo img {
+  height: 32px !important;
+}

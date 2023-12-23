@@ -1,8 +1,8 @@
 ---
-title: 让代码回归简洁
+title: ostore
 hero:
   title: ostore
-  description: 一个简洁的轮子仓库
+  # description: 一个实用的轮子仓库
   # actions:
   #   - text: Hello
   #     link: /
