@@ -30,10 +30,8 @@ const Table = (props:IEditTableProps, ref: React.RefObject<HTMLDivElement>) => {
           <thead>
             <tr>
               {columns.map((column: IColumn) => (
-                <th>
-                  <div className="ostore-table-cell-wrapper" key={column.dataIndex}>
-                    {column.title}
-                  </div>
+                <th className="ostore-table-cell-wrapper" key={column.dataIndex}>
+                  {column.title}
                 </th>
               ))}
             </tr>

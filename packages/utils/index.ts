@@ -1,17 +1,17 @@
 
-export * from './_date';
+export * from './date';
 
-export * from './_dom';
+export * from './dom';
 
-export * from './_assets';
+export * from './assets';
 
-export * from './_format';
+export * from './format';
 
-export * from './_math';
+export * from './math';
 
-export * from './_storage';
+export * from './storage';
 
-export * from './_url';
+export * from './url';
 
-export * from './_utils';
+export * from './utils';
 

@@ -1,15 +1,14 @@
 ---
-
 nav:
-  title: 功能实现
-  path: /functional/border
+  title: 功能
 
-# group: 手搓组件
+group:
+  title: css实现
+  order: 0
 
-# type: 原则
-
-order: 8
-title: border
+title: 渐变边框
+order: 4
+toc: content
 ---
 
 ```js

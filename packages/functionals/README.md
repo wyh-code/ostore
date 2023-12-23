@@ -1,9 +1,11 @@
 ---
 nav:
-  title: 函数
-  path: /components/table
+  title: 实现
+  path: /functionals/border
 
-group: 版本更新
+group: 
+  title: 版本更新
+  order: 1
 
 order: 1
 title: 历史版本

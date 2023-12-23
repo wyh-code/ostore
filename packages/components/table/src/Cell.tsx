@@ -29,7 +29,7 @@ export default ({ column, record, index, editRow, field, validateDisabled, valid
     const { setFieldValue } = field;
     return {
       ...childProps,
-      onChange: (value: any, event: EventTarget|undefined) => {
+      onChange: (value: any, event: EventTarget | undefined) => {
         setFieldValue(index, name, value);
         // if (column.debounce) {
         //   debounce(field.validator(index, name), column.debounce);
@@ -71,13 +71,11 @@ export default ({ column, record, index, editRow, field, validateDisabled, valid
   field.registerField(index, config);
 
   return (
-    <td style={{ width: column.width }}>
-      <div className={`ostore-table-cell-wrapper ostore-table-cell-message-wrapper`}>
-        {CloneElement}
-        {isEdit && errorMessage && (
-          <span className="cell-message">{errorMessage[0]}</span>
-        )}
-      </div>
+    <td className={`ostore-table-cell-wrapper ostore-table-cell-message-wrapper`} style={{ width: column.width }}>
+      {CloneElement}
+      {isEdit && errorMessage && (
+        <span className="cell-message">{errorMessage[0]}</span>
+      )}
     </td>
   );
 };
