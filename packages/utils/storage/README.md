@@ -42,3 +42,131 @@ const allCookies = getCookies(); // console.log(allCookies);
 // 获取名为"user"的cookie值
 const userCookie = getCookies('user'); // console.log(userCookie);
 ```
+
+## setLocalStorage
+
+`用于将指定的键值对存储到浏览器的localStorage中，并允许设置额外的选项，包括截止时间、过期时间和访问权限。`
+
+<b>使用方式：</b>要使用 setLocalStorage 函数，可以将要保存的数据（data），以及一个可选的 options 对象传入。options 对象可以包含截止时间（endTime），相对于当前时间的过期时间（expiry），以及一个字符串数组，指定哪些用户权限可以访问此数据（permissions）。
+
+<b>注意事项</b>
+
+- localStorage 是持久存储，即使关闭浏览器，数据也会保留。
+- 存储在 localStorage 中的数据必须是字符串。本函数通过 JSON.stringify 自动序列化非字符串数据。
+- 如果浏览器的 localStorage 已满，存储尝试可能会失败。应检查本函数是否返回错误。
+- 因为数据是明文存储的，敏感信息不应该存储在 localStorage 中。
+- localStorage 受同源策略限制，只能在相同协议、域名和端口下的页面之间共享。
+
+使用示例:
+
+```js
+import { setLocalStorage } from '@ostore/utils';
+
+// 将用户数据存储到localStorage中
+setLocalStorage('user-data', { name: 'John Doe', age: 30 });
+
+// 将用户数据存储到localStorage中，设置30分钟后过期
+setLocalStorage(
+  'user-data',
+  { name: 'John Doe', age: 30 },
+  {
+    expiry: 1800000,
+  },
+);
+
+// 将用户数据存储到localStorage中，设置2999-12-12日过期，并且只允许具有admin权限的用户访问：
+setLocalStorage(
+  'user-data',
+  { name: 'John Doe', age: 30 },
+  {
+    endTime: 32501952000000, // 2999-12-12
+    permissions: ['admin'],
+  },
+);
+```
+
+## getLocalStorage
+
+`用来从浏览器的 localStorage 中检索数据，并做处理验证检查，例如过期和用户权限。`
+
+<b>行为描述：</b>
+
+- 函数开始尝试使用给定的键从 `localStorage` 中检索项。
+- 如果找到项，函数尝试将其解析为 `JSON`。
+- 解析出的对象应该包含一个可能是可选的 `options` 对象和一个 `data` 属性。
+- options 对象可能包含：
+  - `endTime`: 指示缓存项何时过期的时间戳
+  - expiry: 缓存项基于当前时间不应超过的时间戳。
+  - permissions: 需要访问缓存项的权限字符串数组。
+- 如果设置了 endTime 并且当前时间晚于 endTime，则该项将从 localStorage 中移除，并返回 null。
+- 如果设置了 expiry 并且当前时间已经超过了 expiry，则该项将从 localStorage 中移除，并返回 null。
+- 如果设置了 permissions，函数检查是否提供了 userPermissions 并且包含至少一个所需的权限。如果没有，则在控制台记录一个错误，并返回 null。
+- 如果所有检查都通过，则返回缓存项的 data 属性。
+
+使用示例：
+
+```js
+import { getLocalStorage } from '@ostore/utils';
+
+// 假设 localStorage 有一个 'user-data' 的键，其中包含了所需的权限
+const userPermissions = ['read', 'write'];
+const userData = getLocalStorage('user-data', userPermissions);
+
+if (userData) {
+  console.log('已检索到用户数据:', userData);
+} else {
+  console.log('未能检索到用户数据或访问被拒绝。');
+}
+```
+
+## setSessionStorage
+
+`用于将指定的键值对存储到浏览器的sessionStorage中，并允许设置额外的选项，包括截止时间、过期时间和访问权限。`
+
+使用示例:
+
+```js
+import { setSessionStorage } from '@ostore/utils';
+
+// 将用户数据存储到sessionStorage中
+setSessionStorage('user-data', { name: 'John Doe', age: 30 });
+
+// 将用户数据存储到localStorage中，设置30分钟后过期
+setSessionStorage(
+  'user-data',
+  { name: 'John Doe', age: 30 },
+  {
+    expiry: 1800000,
+  },
+);
+
+// 将用户数据存储到localStorage中，设置2999-12-12日过期，并且只允许具有admin权限的用户访问：
+setSessionStorage(
+  'user-data',
+  { name: 'John Doe', age: 30 },
+  {
+    endTime: 32501952000000, // 2999-12-12
+    permissions: ['admin'],
+  },
+);
+```
+
+## getSessionStorage
+
+`用来从浏览器的 sessionStorage 中检索数据，并做处理验证检查，例如过期和用户权限。`
+
+使用示例：
+
+```js
+import { getSessionStorage } from '@ostore/utils';
+
+// 假设 sessionStorage 有一个 'user-data' 的键，其中包含了所需的权限
+const userPermissions = ['read', 'write'];
+const userData = getSessionStorage('user-data', userPermissions);
+
+if (userData) {
+  console.log('已检索到用户数据:', userData);
+} else {
+  console.log('未能检索到用户数据或访问被拒绝。');
+}
+```
