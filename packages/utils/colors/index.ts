@@ -30,17 +30,17 @@ export interface colorResult {
  * 将rgb或rgba颜色字符串转换为多种颜色格式，包括hex（十六进制）、hexa（带透明度的十六进制）、rgb、rgba以及HSL（色相、饱和度、亮度）相关格式。
  * @param rgba: string  一个符合rgba格式的颜色字符串，例如："rgba(255, 165, 0, 0.8)"。
  * @returns 返回一个colorResult对象，其中包含以下属性：
- *            hex: string; 不带透明度的十六进制颜色代码。
-              hexa: string; 带有透明度的十六进制颜色代码。
-              rgb: string; 不带透明度的RGB颜色表示，即使原始rgba字符串包含透明度信息。
-              rgba: string; 包括透明度的原始RGB颜色表示。
-              hsl: string; 转换为HSL颜色表示的字符串。
-              hsla: string; 转换为带透明度的HSL颜色表示的字符串。
-              r: number; 红色通道的值。
-              g: number; 绿色通道的值。
-              b: number; 蓝色通道的值。
-              a: number; 透明度值。
- */
+ * hex: string; 不带透明度的十六进制颜色代码。
+ * hexa: string; 带有透明度的十六进制颜色代码。
+ * rgb: string; 不带透明度的RGB颜色表示，即使原始rgba字符串包含透明度信息。
+ * rgba: string; 包括透明度的原始RGB颜色表示。
+ * hsl: string; 转换为HSL颜色表示的字符串。
+ * hsla: string; 转换为带透明度的HSL颜色表示的字符串。
+ * r: number; 红色通道的值。
+ * g: number; 绿色通道的值。
+ * b: number; 蓝色通道的值。
+ * a: number; 透明度值。
+*/
 export function rgbaToHex(rgba: string): colorResult {
   const [rgb, r, g, b, a = 1] = Array.from(rgba.match(rgbaRegex) || []) as any;
   const toHex = (n: number): string => Number(n).toString(16).padStart(2, '0');

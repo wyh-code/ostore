@@ -55,6 +55,11 @@ console.log(numberWithCommas('1234567')); // 输出: "1,234,567"
 使用示例：
 
 ```js
+/**
+ * 用于格式化银行卡号，使其更易于阅读。
+ * @param cardNumber: string  银行卡号字符串，可以包含数字和（可选的）分隔符如破折号或空格。
+ * @returns 格式化后的银行卡号字符串，每四位数字之间由一个空格分隔。
+ */
 import { formatBankCardNumber } from '@ostore/utils';
 console.log(formatBankCardNumber('1234567890123456')); // 输出: "1234 5678 9012 3456"
 console.log(formatBankCardNumber('1234-5678-9012-3456')); // 输出: "1234 5678 9012 3456"

@@ -21,10 +21,10 @@ export function numberWithCommas(x: number | string): string {
 }
 
 /**
- * 
- * @param cardNumber 
- * @returns 
- */
+ * 用于格式化银行卡号，使其更易于阅读。
+ * @param cardNumber: string  银行卡号字符串，可以包含数字和（可选的）分隔符如破折号或空格。 
+ * @returns 格式化后的银行卡号字符串，每四位数字之间由一个空格分隔。
+*/
 export function formatBankCardNumber(cardNumber: string): string {
   // 移除非数字字符
   const digitsOnly = cardNumber.replace(/\D/g, '');
