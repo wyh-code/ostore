@@ -70,46 +70,6 @@ export const copyAsync:TCopyAsyncFunction = (text: string) => {
 };
 
 /**
- * 指定dom元素全屏
- * @param id domId
- */
-export type TRequestFullscreenFunction = (id: string) => void;
-export const requestFullscreen:TRequestFullscreenFunction = (id: string) => {
-  // 尝试通过ID获取DOM元素,使用`any`类型以便调用全屏相关的方法
-  const docElm = document.getElementById(id) as any;
-  if (docElm.requestFullscreen) {
-    // 标准方法
-    docElm.requestFullscreen();
-  } else if (docElm.msRequestFullscreen) {
-    // IE11的全屏方法
-    docElm.msRequestFullscreen();
-  } else if (docElm.mozRequestFullScreen) {
-    // Firefox的全屏方法
-    docElm.mozRequestFullScreen();
-  } else if (docElm.webkitRequestFullScreen) {
-     // Chrome及较早的Safari的全屏方法
-    docElm.webkitRequestFullScreen();
-  }
-};
-// 退出全屏
-export type TExitFullScreenFunction = () => void;
-export const exitFullScreen: TExitFullScreenFunction = () => {
-  if (document.exitFullscreen) {
-    // 使用标准方法退出全屏模式
-    document.exitFullscreen();
-  } else if ((document as any).msExitFullscreen) {
-    // 针对IE浏览器的退出全屏方法
-    (document as any).msExitFullscreen();
-  } else if ((document as any).mozCancelFullScreen) {
-    // 针对Firefox浏览器的退出全屏方法
-    (document as any).mozCancelFullScreen();
-  } else if ((document as any).webkitCancelFullScreen) {
-    // 针对Chrome以及旧版Safari的退出全屏方法
-    (document as any).webkitCancelFullScreen();
-  }
-};
-
-/**
  * 根据指定key的值，对对象数组进行去重
  * @param arr 需要去重的数组
  * @param key 指定key
