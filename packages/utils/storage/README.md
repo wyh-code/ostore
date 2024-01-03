@@ -60,6 +60,17 @@ const userCookie = getCookies('user'); // console.log(userCookie);
 使用示例:
 
 ```js
+/**
+ * 用于将指定的键值对存储到浏览器的localStorage中
+ * @param key 用于存储数据项的键名
+ * @param value 需要存储到localStorage中的数据值
+ * @param options?:  IOptions (可选) 一个包含缓存选项的对象
+ *          - endTime?: number; Unix时间戳，表示数据的最后截止时间。如果设置了endTime，当当前时间超过endTime时，存储的数据将被认为无效。
+            - expiry?: number; 表示从当前时间开始多少毫秒后数据过期的时间跨度。如果设置了expiry，它将在当前时间的基础上增加指定的毫秒数，用于计算过期时间戳。
+            - permissions?: string[];  一个字符串数组，指定哪些用户权限可以访问存储的数据。仅当检索数据时提供匹配的权限时，该数据才可用。
+ *
+ */
+
 import { setLocalStorage } from '@ostore/utils';
 
 // 将用户数据存储到localStorage中
@@ -106,6 +117,12 @@ setLocalStorage(
 使用示例：
 
 ```js
+/**
+ * 用于获取localStorage中指定的键的值
+ * @param key 用于获取数据项的键名
+ * @param userPermissions?: string[] (可选);一个字符串数组，代表请求数据的用户所拥有的权限。这些权限将与缓存项的权限进行比较，以确定用户是否有权访问数据。
+ * @returns 函数返回与key关联的数据，如果数据未过期并且用户具有足够的访问权限。如果数据不存在、已过期、或用户权限不足，将返回null。
+ */
 import { getLocalStorage } from '@ostore/utils';
 
 // 假设 localStorage 有一个 'user-data' 的键，其中包含了所需的权限
@@ -126,12 +143,23 @@ if (userData) {
 使用示例:
 
 ```js
+/**
+ * 用于将指定的键值对存储到浏览器的sessionStorage中
+ * @param key 用于存储数据项的键名
+ * @param value 需要存储到sessionStorage中的数据值
+ * @param options?:  IOptions (可选) 一个包含缓存选项的对象
+ *          - endTime?: number; Unix时间戳，表示数据的最后截止时间。如果设置了endTime，当当前时间超过endTime时，存储的数据将被认为无效。
+            - expiry?: number; 表示从当前时间开始多少毫秒后数据过期的时间跨度。如果设置了expiry，它将在当前时间的基础上增加指定的毫秒数，用于计算过期时间戳。
+            - permissions?: string[];  一个字符串数组，指定哪些用户权限可以访问存储的数据。仅当检索数据时提供匹配的权限时，该数据才可用。
+ *
+ */
+
 import { setSessionStorage } from '@ostore/utils';
 
 // 将用户数据存储到sessionStorage中
 setSessionStorage('user-data', { name: 'John Doe', age: 30 });
 
-// 将用户数据存储到localStorage中，设置30分钟后过期
+// 将用户数据存储到sessionStorage中，设置30分钟后过期
 setSessionStorage(
   'user-data',
   { name: 'John Doe', age: 30 },
@@ -140,7 +168,7 @@ setSessionStorage(
   },
 );
 
-// 将用户数据存储到localStorage中，设置2999-12-12日过期，并且只允许具有admin权限的用户访问：
+// 将用户数据存储到sessionStorage中，设置2999-12-12日过期，并且只允许具有admin权限的用户访问：
 setSessionStorage(
   'user-data',
   { name: 'John Doe', age: 30 },
@@ -158,6 +186,12 @@ setSessionStorage(
 使用示例：
 
 ```js
+/**
+ * 用于获取sessionStorage中指定的键的值
+ * @param key 用于获取数据项的键名
+ * @param userPermissions?: string[] (可选);一个字符串数组，代表请求数据的用户所拥有的权限。这些权限将与缓存项的权限进行比较，以确定用户是否有权访问数据。
+ * @returns 函数返回与key关联的数据，如果数据未过期并且用户具有足够的访问权限。如果数据不存在、已过期、或用户权限不足，将返回null。
+ */
 import { getSessionStorage } from '@ostore/utils';
 
 // 假设 sessionStorage 有一个 'user-data' 的键，其中包含了所需的权限

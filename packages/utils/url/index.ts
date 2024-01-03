@@ -55,28 +55,3 @@ export const packUrlParams:TPackUrlParamsFunction = (params = {}) => {
   return query.slice(0, -1);
 };
 
-
-/**
- * 将base64转换为字符串中的原始二进制数据
- * @param dataURI base64
- * @returns 
- */
-export type TDataURItoBlobFunction = (dataURI: string) => Blob;
-export const dataURItoBlob:TDataURItoBlobFunction = (dataURI: string) => {
-  // 解码Base64数据
-  const byteString = atob(dataURI.split(',')[1]);
-  // 解析MIME类型
-  const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-  // 创建一个新的ArrayBuffer，其长度等于解码后的数据长度
-  const ab = new ArrayBuffer(byteString.length);
-  // 创建一个Uint8Array视图来操作ArrayBuffer
-  const ia = new Uint8Array(ab);
-  // 将解码后的数据逐字节复制到ArrayBuffer
-  for (let i = 0; i < byteString.length; i++) {
-    ia[i] = byteString.charCodeAt(i);
-  }
-  // 使用解析出的MIME类型和填充了数据的ArrayBuffer创建Blob对象
-  const blob = new Blob([ab], { type: mimeString });
-  // 返回Blob对象
-  return blob;
-};

@@ -111,37 +111,3 @@ console.log(queryString); // 输出 "user=alice&token=123&active=true"
 const url = `https://example.com/page?${queryString}`;
 console.log(url); // 输出 "https://example.com/page?user=alice&token=123&active=true"
 ```
-
-## dataURItoBlob
-
-`将数据URI转换为Blob对象。`
-
-`dataURItoBlob`函数接受一个 Base64 编码的数据 URI 字符串作为参数，并将其转换为 Blob 对象。这使得可以将数据 URI 表示的文件内容以 Blob 的形式用于如文件下载或表单提交等场景。
-
-<b>原理：</b>数据 URI 通常包含两部分：一是媒体类型（MIME 类型），二是 Base64 编码的数据本体。函数首先从数据 URI 中解析出这两部分。然后，它创建一个与数据等长的 ArrayBuffer，并创建一个 Uint8Array 视图来操作该缓冲区。函数逐字节地将 Base64 解码后的数据复制到 ArrayBuffer 中。最后，函数使用解析出的 MIME 类型和填充了数据的 ArrayBuffer 创建一个新的 Blob 对象并返回。
-
-<b>注意事项:</b>
-
-- 输入的数据 URI 需要是有效的 Base64 编码字符串，且包含 MIME 类型。
-- 对于大型数据 URI，此操作可能会消耗较多内存，并且可能在一些旧的浏览器上不被支持。
-
-使用示例:
-
-```js
-/**
- * @param dataURI - 一个编码为Base64的数据URI字符串。
- * @returns 返回一个表示数据内容的Blob对象。
- */
-
-import { dataURItoBlob } from '@ostore/utils';
-
-// 假设有一个Base64编码的PNG图片的数据URI
-const dataURI = 'data:image/png;base64,iVBORw0KGgo...';
-
-// 转换数据URI为Blob对象
-const imageBlob = dataURItoBlob(dataURI);
-
-// 使用Blob对象（例如上传到服务器或创建一个可下载的链接）
-const formData = new FormData();
-formData.append('file', imageBlob, 'image.png');
-```
