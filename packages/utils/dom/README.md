@@ -71,7 +71,9 @@ if (parentWithClass) {
 /**
  * @param id - 要全屏显示的DOM元素的ID。
  */
+
 import { requestFullscreen } from '@ostore/utils';
+
 // 请求ID为'myVideo'的视频元素进入全屏模式
 requestFullscreen('myVideo');
 ```
